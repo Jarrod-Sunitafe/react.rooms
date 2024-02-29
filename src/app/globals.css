@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --textlight: #e5e5e5;
+  --textlight: #ffffff;
   --textdark: #28282B;
 }
 
