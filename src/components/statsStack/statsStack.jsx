@@ -1,9 +1,28 @@
+'use client'
+
 import * as React from "react"
+import { useState, useEffect } from "react";
 import { Card, CardContent, Stack, Typography } from "@mui/joy";
 import styles from "./statsStack.module.css"
 import CircleIcon from '@mui/icons-material/Circle';
 
-const StatsStack = () => {
+export default function StatsStack() {
+    const [totalInuse, setTotalInuse] = useState(0);
+
+    useEffect(() => {
+        fetch('/api/get-all-inuse/', {method: 'GET'}) // Fetch data from the backend API
+        .then(response => {
+            if(!response.ok) {
+                alert('Unable to fetch API...'); // Display an alert if the response is not ok
+            }
+            return response.json(); // Parse the JSON response
+        })
+        .then(data => {
+            setTotalInuse(data.totalInuse); // Update the state with the fetched data
+        })
+        .catch(error => console.log(error.message)); // Log any errors
+    },[]);
+
     return(
         <Stack
         direction={{ xs: 'column', sm: 'row' }}
@@ -30,12 +49,11 @@ const StatsStack = () => {
             </Card>
             <Card variant="outlined" className={styles.card} sx={{flexGrow: 1, flexShrink: 1, flexBasis: 0}}>
                 <CardContent>
-                    <Typography level="title-md" className={styles.cardTitle}>190</Typography>
+                    <Typography level="title-md" className={styles.cardTitle}>{totalInuse}</Typography>
                     <Typography className={styles.cardText}>Inuse</Typography>
                 </CardContent>
                 <CircleIcon color="success"/>
             </Card>
         </Stack>
-    )
+    );
 }
-export default StatsStack;
