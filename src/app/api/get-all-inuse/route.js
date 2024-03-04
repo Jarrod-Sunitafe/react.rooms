@@ -2,20 +2,35 @@
 import { MongoClient } from 'mongodb';
 import clientPromise from '@/lib/mongodb';
 
-// Define a function to handle GET requests
-export async function GET(res) {
+let client;
+let database;
+let agents;
+
+
+async function init() {
     try {
-        const client = await clientPromise;
-        const database = client.db(process.env.MongoDb);
-        const agent = database.collection("Agents");
-        console.log('Connected');
-
-        // Use await inside an asynchronous function
-        const count = await agent.countDocuments({ IsActive: true });
-
-        res.status(200).json({ count });
-        client.close();
+        client = await clientPromise;
+        database = client.db(process.env.MongoDb);
+        agents = database.collection("Agents");
     } catch (error) {
         console.error('Failed to connect to the database:', error);
+        throw error; // Re-throw the error to indicate initialization failure
     }
 }
+
+// Function to handle GET requests to fetch agents
+export async function GET() {
+    try {
+        // Ensure database and collections are initialized
+        if (!agents) await init();
+
+        // Query agents collection and return the result
+        const result = await agents.countDocuments({ IsActive: true });
+        return new Response(JSON.stringify({ agents: result }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+    } catch (error) {
+        console.error('Failed to fetch agents:', error);
+        return new Response(JSON.stringify({ error: 'Failed to fetch Agents' }), { status: 500, headers: { 'Content-Type': 'application/json' } });
+    }
+}
+
+

@@ -10,7 +10,7 @@ export default function StatsStack() {
     const [totalInuse, setTotalInuse] = useState(0);
 
     useEffect(() => {
-        fetch('/api/get-all-inuse/', {method: 'GET'}) // Fetch data from the backend API
+        fetch('/api/get-all-inuse/') // Fetch data from the backend API
         .then(response => {
             if(!response.ok) {
                 alert('Unable to fetch API...'); // Display an alert if the response is not ok

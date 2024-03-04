@@ -1,15 +1,17 @@
 import { MongoClient } from "mongodb";
+import * as fs from "fs";
+
 
 const uri = process.env.MongoUri
 const options = {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
+  tlsCAFile: '/etc/ssl/certs/ca-certificates.crt',
+  tlsAllowInvalidCertificates: true
 }
 
 let client
 let clientPromise
 
-if(!process.env.MongoUri){
+if(!uri){
     throw new Error('Add Mongo URI to .env.local')
 }
 
