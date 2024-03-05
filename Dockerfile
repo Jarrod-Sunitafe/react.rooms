@@ -1,10 +1,10 @@
 # Stage 1: Base Image
-FROM node:18-alpine AS base
+FROM node:21-alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps
 RUN apk add --no-cache libc6-compat
-WORKDIR /src/app
+WORKDIR /app
 
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
@@ -17,8 +17,8 @@ RUN \
 
 # Stage 2: Builder Image
 FROM base AS builder
-WORKDIR /src/app
-COPY --from=deps /src/app/node_modules ./node_modules
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Next.js collects completely anonymous telemetry data about general usage.
@@ -35,7 +35,7 @@ RUN \
 
 # Stage 3: Runner Image
 FROM base AS runner
-WORKDIR /src/app
+WORKDIR /app
 
 ENV NODE_ENV production
 
@@ -43,21 +43,21 @@ ENV NODE_ENV production
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 nextjs
 
-COPY --from=builder /src/app/public ./public
+COPY --from=builder /app/public ./public
 
 RUN mkdir .next
 RUN chown nextjs:nodejs .next
 
 # Automatically leverage output traces to reduce image size
-COPY --from=builder --chown=nextjs:nodejs /src/app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /src/app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 USER nextjs
 
 EXPOSE 3000
 
 ENV PORT 3000
-ENV HOSTNAME "localhost"
+ENV HOSTNAME "0.0.0.0"
 
 # server.js is created by next build from the standalone output
 CMD ["node", "server.js"]
