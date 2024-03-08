@@ -12,7 +12,8 @@ export default function StatsStack() {
     const [totalDevice, setTotalDevice] = useState(0);
 
     useEffect(() => {
-        fetch('/api/get-all-inuse/') // Fetch data from the backend API
+        const fetchData = async() => {
+        fetch('/api/get-all-inuse') // Fetch data from the backend API
         .then(response => {
             if(!response.ok) {
                 alert('Unable to fetch API...'); // Display an alert if the response is not ok
@@ -23,10 +24,15 @@ export default function StatsStack() {
             setTotalInuse(data.agents); // Update the state with the fetched data
         })
         .catch(error => console.log(error.message)); // Log any errors
+        };
+        fetchData();
+        const intarval = setInterval(fetchData, 60000);
+        return () => clearInterval(intarval); 
     },[]);
 
     useEffect(() => {
-        fetch('/api/get-all-online/') // Fetch data from the backend API
+        const fetchData = async() => {
+        fetch('/api/get-all-online') // Fetch data from the backend API
         .then(response => {
             if(!response.ok) {
                 alert('Unable to fetch API...'); // Display an alert if the response is not ok
@@ -37,10 +43,15 @@ export default function StatsStack() {
             setTotalOnline(data.agents); // Update the state with the fetched data
         })
         .catch(error => console.log(error.message)); // Log any errors
+        };
+        fetchData();
+        const intarval = setInterval(fetchData, 60000);
+        return () => clearInterval(intarval); 
     },[]);
 
     useEffect(() => {
-        fetch('/api/get-all-device/') // Fetch data from the backend API
+        const fetchData = async() => {
+        fetch('/api/get-all-device') // Fetch data from the backend API
         .then(response => {
             if(!response.ok) {
                 alert('Unable to fetch API...'); // Display an alert if the response is not ok
@@ -51,6 +62,10 @@ export default function StatsStack() {
             setTotalDevice(data.devices); // Update the state with the fetched data
         })
         .catch(error => console.log(error.message)); // Log any errors
+        };
+        fetchData();
+        const intarval = setInterval(fetchData, 60000);
+        return () => clearInterval(intarval); 
     },[]);
 
 

@@ -1,5 +1,4 @@
 // Import necessary dependencies
-import { MongoClient } from 'mongodb';
 import clientPromise from '@/lib/mongodb';
 
 let client;
@@ -32,3 +31,4 @@ export async function GET() {
         return new Response(JSON.stringify({ error: 'Failed to fetch Agents' }), { status: 500, headers: { 'Content-Type': 'application/json' } });
     }
 }
+
