@@ -13,7 +13,7 @@ export default function StatsStack() {
 
     useEffect(() => {
         const fetchData = async() => {
-        fetch('/api/get-all-inuse') // Fetch data from the backend API
+        fetch('/api/get-all-inuse', { method: 'GET', next: { revalidate: 1900 } }) // Fetch data from the backend API
         .then(response => {
             if(!response.ok) {
                 alert('Unable to fetch API...'); // Display an alert if the response is not ok
@@ -32,7 +32,7 @@ export default function StatsStack() {
 
     useEffect(() => {
         const fetchData = async() => {
-        fetch('/api/get-all-online') // Fetch data from the backend API
+        fetch('/api/get-all-online',) // Fetch data from the backend API
         .then(response => {
             if(!response.ok) {
                 alert('Unable to fetch API...'); // Display an alert if the response is not ok
