@@ -32,10 +32,10 @@ export async function GET(request) {
         if (!agents) await init();
 
         const requestMethod = request.method;
-        console.error(`Received ${requestMethod} request.`);
+        console.log(`Received ${requestMethod} request.`);
     
         // You can also access other properties of the request object
-        console.log('Request Headers:', request.headers);
+        console.error('Request Headers:', request.headers);
 
         await client.connect();
 

@@ -25,23 +25,21 @@ async function init() {
   }
   
   // Function to handle GET requests to fetch agents
-  export async function GET() {
-    let session;
-  
+  export async function GET(request) {
+    
     try {
       // Ensure database and collections are initialized
-      if (!agents) {
-        console.log('Agents collection not initialized, calling init()...');
-        await init();
-      }
+      if (!agents) await init();
+      
+      const requestMethod = request.method;
+      console.log(`Received ${requestMethod} request.`);
   
-      // Start a new session for this request
-      console.log('Starting a new session...');
-      session = client.startSession();
+      // You can also access other properties of the request object
+      console.error('Request Headers:', request.headers);
   
       // Query agents collection and return the result
       console.log('Fetching agents with IsOnline=true...');
-      const result = await agents.countDocuments({ IsOnline: true }, { session });
+      const result = await agents.countDocuments({ IsOnline: true });
       console.log('Agents count:', result);
   
       return new Response(JSON.stringify({ agents: result }), {
@@ -54,11 +52,6 @@ async function init() {
         status: 500,
         headers: { 'Content-Type': 'application/json' }
       });
-    } finally {
-      // End the session
-      if (client) {
-        console.log('Ending session...');
-        await client.close();
-      }
-    }
+    } 
+    
   }

@@ -18,10 +18,16 @@ async function init() {
 }
 
 // Function to handle GET requests to fetch agents
-export async function GET() {
+export async function GET(request) {
     try {
         // Ensure database and collections are initialized
         if (!devices) await init();
+
+        const requestMethod = request.method;
+        console.log(`Received ${requestMethod} request.`);
+    
+        // You can also access other properties of the request object
+        console.error('Request Headers:', request.headers);
 
         // Query agents collection and return the result
         const result = await devices.countDocuments();
