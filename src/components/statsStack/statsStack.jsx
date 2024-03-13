@@ -1,8 +1,9 @@
-'use client'
+"use client"
 
 import * as React from "react"
 import { useState, useEffect } from "react";
 import { Card, CardContent, Stack, Typography } from "@mui/joy";
+import { ResponsiveContainer, LineChart, Line, Tooltip } from "recharts"; 
 import styles from "./statsStack.module.css"
 import CircleIcon from '@mui/icons-material/Circle';
 
@@ -69,6 +70,14 @@ export default function StatsStack() {
     },[]);
 
 
+    const testData = 
+    [{"Device": 142},
+    {"Device": 134},
+    {"Device": 136},
+    {"Device": 129},
+    {"Device": 125},
+    {"Device": 140},]
+
     return(
         <Stack
         direction={{ xs: 'column', sm: 'row' }}
@@ -84,6 +93,12 @@ export default function StatsStack() {
                     <Typography level="title-md" className={styles.cardTitle}>{totalDevice}</Typography>
                     <Typography className={styles.cardText}>Total Devices</Typography>
                 </CardContent>
+                <ResponsiveContainer className={styles.lineContainer}>
+                    <LineChart width={250} height={80} data={testData}>
+                        <Tooltip/>
+                        <Line type="monotone" dataKey="Device" stroke="#ADD8E6"/>
+                    </LineChart>
+                </ResponsiveContainer>
                 <CircleIcon color="primary"/>
             </Card>
             <Card variant="outlined" className={styles.card} sx={{flexGrow: 1, flexShrink: 1, flexBasis: 0}}>
@@ -91,6 +106,12 @@ export default function StatsStack() {
                     <Typography level="title-md" className={styles.cardTitle}>{totalOnline}</Typography>
                     <Typography className={styles.cardText}>Online</Typography>
                 </CardContent>
+                <ResponsiveContainer className={styles.lineContainer}>
+                    <LineChart width={250} height={80} data={testData}>
+                        <Tooltip/>
+                        <Line type="monotone" dataKey="Device" stroke="#FFD580"/>
+                    </LineChart>
+                </ResponsiveContainer>
                 <CircleIcon color="warning"/>
             </Card>
             <Card variant="outlined" className={styles.card} sx={{flexGrow: 1, flexShrink: 1, flexBasis: 0}}>
@@ -98,6 +119,12 @@ export default function StatsStack() {
                     <Typography level="title-md" className={styles.cardTitle}>{totalInuse}</Typography>
                     <Typography className={styles.cardText}>Inuse</Typography>
                 </CardContent>
+                <ResponsiveContainer className={styles.lineContainer}>
+                    <LineChart width={250} height={80} data={testData}>
+                        <Tooltip/>
+                        <Line type="monotone" dataKey="Device" stroke="#B1F3B1" dot={{ stroke: 'green'}}/>
+                    </LineChart>
+                </ResponsiveContainer>
                 <CircleIcon color="success"/>
             </Card>
         </Stack>

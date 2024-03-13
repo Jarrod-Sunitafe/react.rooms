@@ -5,6 +5,13 @@
     justify-content: space-between;
 }
 
+.lineContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 70px;
+}
+
 @media (prefers-color-scheme: dark) {
     .card{
         color: var(--textlight);
