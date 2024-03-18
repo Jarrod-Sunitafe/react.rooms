@@ -1,10 +1,10 @@
 "use client"
 
-import * as React from "react"
+import * as React from "react";
 import { useState, useEffect } from "react";
 import { Card, CardContent, Stack, Typography } from "@mui/joy";
 import { ResponsiveContainer, LineChart, Line, Tooltip } from "recharts"; 
-import styles from "./statsStack.module.css"
+import styles from "./statsStack.module.css";
 import CircleIcon from '@mui/icons-material/Circle';
 
 export default function StatsStack() {
@@ -74,9 +74,9 @@ export default function StatsStack() {
     [{"Device": 142},
     {"Device": 134},
     {"Device": 136},
-    {"Device": 129},
-    {"Device": 125},
-    {"Device": 140},]
+    {"Device": 60},
+    {"Device": 36},
+    {"Device": 140}]
 
     return(
         <Stack
@@ -121,7 +121,7 @@ export default function StatsStack() {
                 </CardContent>
                 <ResponsiveContainer className={styles.lineContainer}>
                     <LineChart width={250} height={80} data={testData}>
-                        <Tooltip/>
+                        <Tooltip className={styles.inuseToolTip}/>
                         <Line type="monotone" dataKey="Device" stroke="#B1F3B1" dot={{ stroke: 'green'}}/>
                     </LineChart>
                 </ResponsiveContainer>
