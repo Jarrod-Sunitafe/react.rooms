@@ -5,7 +5,9 @@
 :root {
   --textlight: #ffffff;
   --textdark: #28282B;
-}
+  --darkBackground: linear-gradient(140deg, hsla(240, 100%, 5%, 1) 0%, hsla(240, 100%, 10%, 1) 30%, hsla(240, 100%, 20%, 1) 60%, hsla(240, 100%, 30%, 1) 100%);
+  --lightBackground: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(122, 157, 255, 0.8) 50%, rgba(122, 157, 255, 0.8) 100%);
+};
 
 @media (prefers-color-scheme: dark) {
   :root {

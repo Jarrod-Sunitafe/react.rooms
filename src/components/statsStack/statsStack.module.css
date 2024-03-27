@@ -3,6 +3,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    box-shadow: rgba(60, 60, 128, 0.308) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
 
 .lineContainer{
@@ -10,7 +11,7 @@
     align-items: center;
     justify-content: center;
     min-height: 70px;
-}
+} /*
 
     .inuseToolTip{
         background-color: #23395d;
@@ -47,4 +48,4 @@
     .cardText{
         color: #3b3b3b;
     }
-}
+} */
