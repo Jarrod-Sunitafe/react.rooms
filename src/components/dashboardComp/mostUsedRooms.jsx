@@ -3,6 +3,7 @@
 import { Table } from "@mui/joy";
 import * as React from "react";
 import { useEffect, useState } from "react";
+import styles from './mostUsedRooms.module.css'
 
 export default function MostUsedRooms() {
 
@@ -28,7 +29,7 @@ export default function MostUsedRooms() {
     },[]);
 
     return(
-        <Table hoverRow="true">
+        <Table className={styles.tableContainer} hoverRow="true">
             <thead>
                 <tr>
                     <th>Name</th>

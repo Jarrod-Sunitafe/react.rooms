@@ -1,6 +1,7 @@
 // Import necessary dependencies
 import clientPromise from '@/lib/mongodb';
 import { Int32 } from 'mongodb';
+import { hostname } from 'os';
 
 let client;
 let database;
@@ -53,7 +54,7 @@ async function init() {
         headers: { 'Content-Type': 'application/json' }
       });
     } catch (error) {
-      console.error('Failed to fetch rooms:', error);
+      console.error('Failed to fetch rooms:', error);hostname
       return new Response(JSON.stringify({ error: 'Failed to fetch Rooms' }), {
         status: 500,
         headers: { 'Content-Type': 'application/json' }

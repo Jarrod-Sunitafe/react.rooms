@@ -2,7 +2,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar/navbar";
 import Footer from "@/components/footer/footer"
-import { getInitColorSchemeScript } from '@mui/joy/styles';
+import CssBaseline from '@mui/joy/CssBaseline';
+import { CssVarsProvider, useColorScheme } from '@mui/joy/styles';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,6 +16,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <CssVarsProvider >
+      <CssBaseline />
       <body className={inter.className}>
         <div className="container">
           <Navbar/>
@@ -22,6 +25,7 @@ export default function RootLayout({ children }) {
           <Footer/>
         </div>
       </body>
+      </CssVarsProvider>
     </html>
   );
 }

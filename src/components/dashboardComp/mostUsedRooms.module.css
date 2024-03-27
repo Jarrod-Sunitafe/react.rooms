@@ -1,0 +1,50 @@
+.card{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.lineContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 70px;
+}
+
+    .inuseToolTip{
+        background-color: #23395d;
+        color: #202020;
+    }
+
+
+@media (prefers-color-scheme: dark) {
+    .tableContainer{
+        color: var(--textlight);
+        background-color: #23395d;
+        border-color: #1c2e4a;
+        box-shadow: rgba(60, 60, 128, 0.308) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    }
+    .cardTitle{
+        color: #ffffff;
+    }
+    .cardText{
+        color: #f6f6f6;
+    }
+
+}
+  
+@media (prefers-color-scheme: light) {
+    .tableContainer{
+        color: var(--textlight);
+        background-color: #ffffff;
+        border-color: #c8d9ed;
+        box-shadow: rgba(60, 60, 128, 0.308) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    }
+    .cardTitle{
+        color: #202020
+    }
+    .cardText{
+        color: #3b3b3b;
+    }
+}
