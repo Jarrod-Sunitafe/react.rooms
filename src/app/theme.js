@@ -87,7 +87,7 @@ const theme = extendTheme({
   },
   "fontFamily": {
     "display": "'Inter', var(--joy-fontFamily-fallback)",
-    "body": "'Inter', var(--joy-fontFamily-fallback)"
+    "body": "'Inter', var(--font-GeoLg)"
   },
   "components": {
     "JoyInput": {
